@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductosService } from './productos.service';
 import { HttpClient } from '@angular/common/http';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,11 @@ export class AppComponent implements OnInit {
 
   nuevo() {
     if (this.prod.descripcion == null || this.prod.precio == null) {
+      swal.fire(
+        'COMPLETE',
+        'TODOS LOS CAMPOS SON REQUERIDOS',
+        'error'
+      );
       return;
     }
     const formData = new FormData();
@@ -47,6 +53,19 @@ export class AppComponent implements OnInit {
     formData.append('precio', this.prod.precio);
 
     this.productosServicio.nuevo(formData).subscribe(result => {
+      swal.fire({
+        toast: true,
+        icon: 'success',
+        title: 'Registro satisfactorio',
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+          toast.addEventListener('mouseenter', swal.stopTimer)
+          toast.addEventListener('mouseleave', swal.resumeTimer)
+        }
+      });
       this.limpiar();
       this.recuperarTodos();
     });
