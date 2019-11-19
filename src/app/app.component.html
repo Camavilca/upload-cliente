@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-6">
+      <div class="card my-5">
+        <h3 class="text-center text-uppercase mt-3">NUEVO producto</h3>
+        <div class="card-body">
+          <form action="/" enctype="multipart/form-data" method="post">
+            <div class="form-group">
+              <label for="descripcion">Descripcion</label>
+              <input type="text" class="form-control" [(ngModel)]="prod.descripcion"
+                [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+              <label for="descripcion">Precio</label>
+              <input type="number" class="form-control" [(ngModel)]="prod.precio" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+              <label for="descripcion">Imagen</label>
+              <input #imageInput type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*"
+                aria-describedby="inputGroupFileAddon01" (change)="fileChange($event)">
+              <label class="custom-file-label" for="inputGroupFile01">
+                Choose file
+              </label>
+            </div>
+            <button class="btn btn-primary btn-rounded btn-sm m-2" (click)="nuevo()">Agregar</button>
+            <button class="btn btn-success btn-rounded btn-sm m-2" (click)="actualizar()">Modificar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-lg-6">
+      <div class="card my-5">
+        <div class="cad-header my-4">
+          <h3 class="text-center text-uppercase text-success card-title">
+            Datos de los productos
+          </h3>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped table-dark m-0" *ngIf="hayRegistros(); else sinproductos">
+            <thead class="">
+              <tr>
+                <td class="text-white col-sm-2">Nombre</td>
+                <td class="text-white col-sm-2">Precio</td>
+                <td class="text-white col-sm-2">Archivo</td>
+                <td class="text-white col-sm-2"></td>
+                <td class="text-white col-sm-2"></td>
+              </tr>
+            </thead>
+            <tr *ngFor="let producto of lista">
+              <td class="col-sm-2">{{producto.descripcion}}</td>
+              <td class="col-sm-2">{{producto.precio}}</td>
+              <td class="col-sm-2">{{producto.image}}</td>
+              <td class="col-sm-2">
+                <a (click)="eliminar(producto.codigo)" class="pointer fa fa-trash fa-2x text-danger"></a>
+              </td>
+              <td class="col-sm-2">
+                <a (click)="mostrar(producto.codigo)" class="pointer fa fa-pencil fa-2x text-primary"></a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
