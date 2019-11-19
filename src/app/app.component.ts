@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
 
   eliminar(codigo) {
     this.productosServicio.eliminar(codigo).subscribe(result => {
-      console.log(result);
+      this.recuperarTodos();
     });
     this.recuperarTodos();
   }

@@ -16,11 +16,18 @@
             </div>
             <div class="form-group">
               <label for="descripcion">Imagen</label>
-              <input #imageInput type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*"
+
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFileLangHTML" accept="image/*" (change)="fileChange($event)">
+                <label class="custom-file-label" for="customFileLangHTML" data-browse="Imagen">Seleccione</label>
+              </div>
+
+
+              <!-- <input #imageInput type="file" class="custom-file-input" id="inputGroupFile01" accept="image/*"
                 aria-describedby="inputGroupFileAddon01" (change)="fileChange($event)">
               <label class="custom-file-label" for="inputGroupFile01">
                 Choose file
-              </label>
+              </label> -->
             </div>
             <button class="btn btn-primary btn-rounded btn-sm m-2" (click)="nuevo()">Agregar</button>
             <button class="btn btn-success btn-rounded btn-sm m-2" (click)="actualizar()">Modificar</button>
